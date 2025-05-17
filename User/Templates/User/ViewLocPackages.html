@@ -1,0 +1,139 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Packages</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px 0;
+        }
+        .package-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        .package-header {
+            background-color: #212529;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .package-body {
+            padding: 0;
+        }
+        .package-table {
+            margin-bottom: 0;
+        }
+        .package-table tr td:first-child {
+            width: 30%;
+            font-weight: 600;
+            background-color: #f2f2f2;
+        }
+        .book-now-row {
+            background-color: #f8f9fa;
+        }
+        .book-now-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #212529;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .book-now-btn:hover {
+            background-color: #343a40;
+            color: white;
+        }
+        .package-price {
+            font-weight: 700;
+            color: #212529;
+        }
+        .package-type, .package-agency {
+            font-style: italic;
+            color: #6c757d;
+        }
+        .package-agency {
+            font-weight: 500;
+        }
+        .package-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .badge-agency {
+            background-color: #212529;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="container package-container">
+        <h2 class="text-center mb-4">Location Packages</h2>
+        <div class="row">
+            {% for i in locpack %}
+            <div class="col-md-12">
+                <div class="package-card">
+                    <div class="package-header d-flex justify-content-between align-items-center">
+                        <span>{{i.package_name}}</span>
+                        <!-- <span class="badge-agency">{{i.agency.agency_name}}</span> -->
+                    </div>
+                    <div class="package-body">
+                        <table class="table table-striped package-table">
+                            <tr>
+                                <td>Details</td>
+                                <td>{{i.package_details}}</td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td><span class="package-price">₹{{i.package_price}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Package Type</td>
+                                <td><span class="package-type">{{i.package_type_id.package_type_name}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Agency</td>
+                                <td><span class="package-agency">{{i.agency.agency_name}}</span></td>
+                            </tr>
+                        </table>
+                        <a href="{% url 'User:PackageBooking' i.id %}" class="book-now-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check me-2" viewBox="0 0 16 16">
+                                <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                            </svg>
+                            Book Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}

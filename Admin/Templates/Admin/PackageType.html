@@ -1,0 +1,78 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Types</title>
+</head>
+<body>
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Package Types</h4>
+            <form  action="" method="post" class="forms-sample">
+              {% csrf_token %}
+              <div class="form-group row">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label ">Package Type:</label>
+                <div class="col-sm-9">
+                    <input required class="form-control" type="text" name="txtptype" id="txtptype" />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary me-2">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Package Type  List</h4>
+            <div class="table-responsive pt-3">
+              <table class="table table-bordered table-hover ">
+                <thead>
+                  <tr>
+                    <th>
+                      #
+                    </th>
+                    <th>
+                        Package Type
+                    </th>
+                    <th>
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in ptype %}
+                  <tr>
+                    <td>
+                        {{forloop.counter}}
+                    </td>
+                    <td>
+                        {{i.package_type_name}}
+                    </td>
+                    <td>
+                      
+                        <a href="{% url  'Admin:deletepackagetype' i.id %}" class="btn btn-outline-danger"><i
+                            class="fa-solid fa-trash"></i></a>
+                      
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+   {% if msg %}
+   <script>
+    alert("{{msg}}");
+    window.location="{% url 'Admin:PackageType'  %}";
+</script>
+{% endif %}
+</body>
+</html>
+{% endblock %}

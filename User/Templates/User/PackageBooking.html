@@ -1,0 +1,116 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Booking</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px 0;
+        }
+        .booking-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .booking-header {
+            background-color: #212529;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .booking-body {
+            padding: 25px;
+        }
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #212529;
+            box-shadow: 0 0 0 0.25rem rgba(33, 37, 41, 0.25);
+        }
+        .btn-dark {
+            background-color: #212529;
+            border-color: #212529;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-dark:hover {
+            background-color: #343a40;
+            transform: translateY(-2px);
+        }
+        .booking-footer {
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+        }
+        .required-field::after {
+            content: "*";
+            color: #dc3545;
+            margin-left: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="booking-card">
+            <div class="booking-header">
+                Package Booking
+            </div>
+            <div class="booking-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="txtfordate" class="form-label required-field">For Date</label>
+                        <input required type="date" class="form-control" name="txtfordate" id="txtfordate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="selploc" class="form-label required-field">Package Location</label>
+                        <select required class="form-select" name="selploc" id="selploc">
+                            <option value="">Select Location</option>
+                            {% for i in ploc %}
+                            <option value="{{i.id}}">{{i.location_id.location_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="txtpcount" class="form-label required-field">Person Count</label>
+                        <input required type="number" class="form-control" name="txtpcount" id="txtpcount" min="1" placeholder="Number of people">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dark">Complete Booking</button>
+                    </div>
+                </form>
+            </div>
+            <div class="booking-footer">
+                <small class="text-muted">All fields marked with * are required</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'User:ViewBookings' %}"
+</script>
+{% endif %}
+</body>
+</html>
+{% endblock %}

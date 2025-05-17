@@ -1,0 +1,33 @@
+{% for i in agency %}
+            <div class="scard">
+                <div class="image-container">
+                    <img src="{{i.agency_photo.url}}" alt="{{i.location_name}}">
+                </div>
+                <div class="content">
+                    <div class="location-name">{{i.agency_name}}</div>
+                    <div class="location-detail">
+                        <span class="label">Email:</span> 
+                        <span>{{i.agency_email}}</span>
+                    </div>
+                    <div class="location-detail">
+                        <span class="label">Contact:</span> 
+                        <span>{{i.agency_contact}}</span>
+                    </div>
+                    <div class="location-detail">
+                        <span class="label">Address:</span> 
+                        <span>{{i.agency_address}}</span>
+                    </div>
+                    <div class="location-detail">
+                        <span class="label">District:</span> 
+                        <span>{{i.agency_place.district.district_name}}</span>
+                    </div>
+                    <div class="location-detail">
+                        <span class="label">Place:</span>
+                        <span>{{i.agency_place.place_name}}</span>
+                    </div>
+                    <div class="view-more">
+                        <a href="{% url 'User:ViewRating' i.id %}">View Ratings</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}

@@ -1,0 +1,309 @@
+{% extends 'Guest/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelAgency Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for the eye icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #000000;
+            --secondary-bg: #f8f9fa;
+            --primary-text: #ffffff;
+            --secondary-text: #212529;
+            --border-color: #000000;
+        }
+        :root {
+            --primary-bg: #000000;
+            --secondary-bg: #f8f9fa;
+            --primary-text: #ffffff;
+            --secondary-text: #212529;
+            --border-color: #000000;
+        }
+        
+        body {
+            
+            background-color: var(--secondary-bg);
+            color: var(--secondary-text);
+            font-family: 'Arial', sans-serif;
+            /* padding: 20px; */
+        }
+        
+        .registration-container {
+            border: black  solid 4px;
+
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .form-header {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .home-link {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-text);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .home-link:hover {
+            color: #cccccc;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--secondary-text);
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-bg);
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-bg);
+            border-color: var(--primary-bg);
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #333333;
+            border-color: #333333;
+        }
+        
+        .form-text {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+        
+        /* Password toggle styles */
+        .password-container {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .password-toggle:hover {
+            color: #000;
+        }
+        
+        /* Footer with home link */
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .form-footer a {
+            color: var(--primary-bg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .form-footer a:hover {
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="container registration-container">
+        <div class="form-header">
+            Travel Agency Registration
+        </div>
+        
+        <form action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {% csrf_token %}
+            
+            <div class="mb-3 row">
+                <label for="txtname" class="col-sm-3 col-form-label form-label">Name</label>
+                <div class="col-sm-9">
+                    <input required type="text" class="form-control" name="txtname" id="txtname" 
+                           title="Name Allows Only Alphabets, Spaces and First Letter Must Be Capital Letter" 
+                           pattern="^[A-Z]+[a-zA-Z ]*$"/>
+                    <div class="form-text">First letter must be capital, only alphabets and spaces allowed.</div>
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="txtemail" class="col-sm-3 col-form-label form-label">Email</label>
+                <div class="col-sm-9">
+                    <input required type="email" class="form-control" name="txtemail" id="txtemail" 
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                           title="Please enter a valid email address.">
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="txtcontact" class="col-sm-3 col-form-label form-label">Contact</label>
+                <div class="col-sm-9">
+                    <input required type="text" class="form-control" name="txtcontact" id="txtcontact" 
+                           pattern="[6-9]{1}[0-9]{9}" 
+                           title="Phone number with 6-9 and remaining 9 digits with 0-9"/>
+                    <div class="form-text">10 digits starting with 6-9.</div>
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="txtaddress" class="col-sm-3 col-form-label form-label">Address</label>
+                <div class="col-sm-9">
+                    <textarea required name="txtaddress" id="txtaddress" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="filephoto" class="col-sm-3 col-form-label form-label">Photo</label>
+                <div class="col-sm-9">
+                    <input required type="file" class="form-control" name="filephoto" id="filephoto">
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="filelicense" class="col-sm-3 col-form-label form-label">License</label>
+                <div class="col-sm-9">
+                    <input required type="file" class="form-control" name="filelicense" id="filelicense">
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="seldistrict" class="col-sm-3 col-form-label form-label">District</label>
+                <div class="col-sm-9">
+                    <select required name="seldistrict" id="seldistrict" class="form-select">
+                        <option value="">Select District</option>
+                        {% for i in dis %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="selplace" class="col-sm-3 col-form-label form-label">Place</label>
+                <div class="col-sm-9">
+                    <select required name="selplace" id="selplace" class="form-select">
+                        <option value="">Select Place</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="txtpassword" class="col-sm-3 col-form-label form-label">Password</label>
+                <div class="col-sm-9">
+                    <div class="password-container">
+                        <input required type="password" class="form-control" name="txtpassword" id="txtpassword" 
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/>
+                        <i class="password-toggle fas fa-eye-slash" id="togglePassword"></i>
+                    </div>
+                    <div class="form-text">Minimum 8 characters with number, uppercase and lowercase letters.</div>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+            
+            <div class="form-footer">
+                <a href="{% url 'Guest:index' %}">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Home
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Password toggle functionality
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('txtpassword');
+            const toggleIcon = document.getElementById('togglePassword');
+            
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle the icon
+            toggleIcon.classList.toggle('fa-eye');
+            toggleIcon.classList.toggle('fa-eye-slash');
+        });
+    
+        // District-Place AJAX functionality
+        $("#seldistrict").change(function () {
+            var did = $(this).val();
+            var ur = "{% url 'Guest:ajaxplace' %}"
+            $.ajax({
+                url: ur,
+                data: { did: did, },
+                success: function (data) {
+                    $("#selplace").html(data);
+                },
+            });
+        });
+        
+        // Bootstrap form validation
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+    
+    {% if msg %}
+    <script>
+        alert("{{msg}}")
+        window.location="{% url 'Guest:TravelAgencyRegistration' %}"
+    </script>
+    {% endif %}
+</body>
+</html>
+{% endblock %}

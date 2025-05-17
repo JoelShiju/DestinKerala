@@ -1,0 +1,128 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place</title>
+</head>
+<body>
+<!-- <form action="" method="post">
+    {% csrf_token %}
+    <table border="2px solid black" class="table table-hover table-bordered">
+        <tr border="2px solid black">
+            <td>District</td>
+            <td>
+                <select required name="seldistrict" id="seldistrict">
+                    <option value="">Select</option>
+                    {% for i in district %}
+                    <option {% if plac.district_id == i.id %} selected {% endif %} value="{{i.id}}">{{i.district_name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr border="2px solid black">
+            <td>Place</td>
+            <td><input required type="text" name="txtplace" id="txtplace" value="{{plac.place_name}}" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$"/></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="Submit"></td>
+        </tr>
+    </table>
+    <table border="1" class="table table-hover table-bordered">
+        <tr >
+            <td >#</td>
+            <td >District</td>
+            <td >Place</td>
+            <td >Action</td>
+        </tr>
+        {% for i in place %}
+        <tr >
+            <td >{{forloop.counter}}</td>
+            <td >{{i.district.district_name}}</td>
+            <td >{{i.place_name}}</td>
+            <td ><a href="{% url  'Admin:deleteplace' i.id %}">Delete</a> | <a href="{% url 'Admin:editplace' i.id %}">Edit</a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</form> -->
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Add Place</h4>
+        <form  action="" method="post" class="forms-sample">
+          {% csrf_token %}
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">District Name</label>
+            <div class="col-sm-9">
+                <select class="form-control" required name="seldistrict" id="seldistrict">
+                    <option value="">Select</option>
+                    {% for i in district %}
+                    <option {% if plac.district_id == i.id %} selected {% endif %} value="{{i.id}}">{{i.district_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Place</label>
+            <div class="col-sm-9">
+                <input required class="form-control" type="text" name="txtplace" id="txtplace" value="{{plac.place_name}}" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$"/>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary me-2">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Place List</h4>
+        <div class="table-responsive pt-3">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>
+                  #
+                </th>
+                <th>
+                  District Name
+                </th>
+                <th>
+                    Place Name
+                  </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in place %}
+              <tr>
+                <td>
+                    {{forloop.counter}}
+                </td>
+                <td>
+                    {{i.district.district_name}}
+                </td>
+                <td>
+                    {{i.place_name}}
+                </td>
+                <td>
+                  
+                    <a href="{% url  'Admin:deleteplace' i.id %}" class="btn btn-outline-danger"><i
+                        class="fa-solid fa-trash"></i></a>  <a href="{% url 'Admin:editplace' i.id %}"
+                    class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                  
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock %}

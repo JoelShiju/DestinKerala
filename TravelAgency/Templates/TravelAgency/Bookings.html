@@ -1,0 +1,24 @@
+{% extends 'TravelAgency/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings</title>
+</head>
+<body>
+    <h1>Bookings</h1>
+    <br>
+    <a href="{% url 'TravelAgency:ViewBookings'%}">Pending Bookings</a>
+    <br>
+    <a href="{% url 'TravelAgency:AcceptedBookings'%}">Accepted Bookings</a>
+    <br>
+    <a href="{% url 'TravelAgency:RejectedBookings'%}">Rejected Bookings</a>
+    <br>
+    <a href="{% url 'TravelAgency:PCBookings'%}">Payment Completed Bookings</a>
+    <br>
+    <a href="{% url 'TravelAgency:ViewRatings'%}">View User Ratings</a>
+</body>
+</html>
+{% endblock %}

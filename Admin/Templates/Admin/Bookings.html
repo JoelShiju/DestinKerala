@@ -1,0 +1,40 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1px">
+        <tr>
+            <td colspan="7">Payment Completed Bookngs</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>user name</td>
+            <td>Travel Agency</td>
+            <td>Package Location</td>
+            <td>Person Count</td>
+            <td>Booking Date</td>
+            <td>Booking ForDate</td>
+            <td>Amount Paid</td>
+        </tr>
+        {% for i in booking %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user_id.user_name}}</td>
+            <td>{{i.packagelocation_id.package_id.agency_id.agency_name}}</td>
+            <td>{{i.packagelocation_id.location_id.location_name}}</td>
+            <td>{{i.person_count}}</td>
+            <td>{{i.packagebooking_date}}</td>
+            <td>{{i.packagebooking_fordate}}</td>
+            <td>{{i.packagelocation_id.package_id.package_price}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock %}

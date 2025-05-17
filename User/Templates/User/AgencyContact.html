@@ -1,0 +1,154 @@
+
+
+{% extends 'User/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Information</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            background-color: #000;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .profile-image-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-info {
+            padding: 0;
+        }
+        
+        .info-row {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            padding: 12px 20px;
+        }
+        
+        .info-value {
+            padding: 12px 20px;
+        }
+        
+        .profile-actions {
+            background-color: #f8f9fa;
+        }
+        
+        .btn-profile {
+            background-color: #000;
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-profile:hover {
+            background-color: #333;
+            color: white;
+        }
+        .navbar-nav a{
+            text-decoration: none;
+        }
+
+        .single-footer-widget{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                Agency Information
+            </div>
+            {% for i in agency %}
+            <div class="profile-image-container">
+                <img src="{{i.agency_photo.url}}" class="profile-image" alt="Profile Photo">
+            </div>
+            
+            <div class="profile-info">
+                <div class="row info-row">
+                    <div class="col-4 info-label">Name</div>
+                    <div class="col-8 info-value">{{i.agency_name}}</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-4 info-label">Email</div>
+                    <div class="col-8 info-value">{{i.agency_email}}</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-4 info-label">Contact</div>
+                    <div class="col-8 info-value">{{i.agency_contact}}</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-4 info-label">Address</div>
+                    <div class="col-8 info-value">{{i.agency_address}}</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-4 info-label">District</div>
+                    <div class="col-8 info-value">{{i.agency_place.district.district_name}}</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-4 info-label">Place</div>
+                    <div class="col-8 info-value">{{i.agency_place.place_name}}</div>
+                </div>
+            </div>
+            
+            <div class="row profile-actions py-3">
+                <div class="col-6 text-center">
+                    <a href="{% url 'User:rating' i.id %}" class="btn btn-profile">Add Rating</a>
+                </div>
+                <div class="col-6 text-center">
+                    <a href="{% url 'User:Complaint' i.id %}" class="btn btn-profile">Register Complaint</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}

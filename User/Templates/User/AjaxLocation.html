@@ -1,0 +1,31 @@
+<!-- {% for i in location %}
+        <div class="scard">
+            <div class="image-container"><img src="{{i.location_photo.url}}" width="150" height="150" alt=""></div>
+            <div>Name : {{i.location_name}}</div>
+            <div>District : {{i.place_id.district.district_name}}</div>
+            <div>Place : {{i.place_id.place_name}}</div>
+            <div><a href="{% url  'User:ViewLocation' i.id %}">View More</a></div>
+        </div>
+        {% endfor %} -->
+
+        {% for i in location %}
+            <div class="scard">
+                <div class="image-container">
+                    <img src="{{i.location_photo.url}}" alt="{{i.location_name}}">
+                </div>
+                <div class="content">
+                    <div class="location-name">{{i.location_name}}</div>
+                    <div class="location-detail">
+                        <span class="label">District:</span> 
+                        <span>{{i.place_id.district.district_name}}</span>
+                    </div>
+                    <div class="location-detail">
+                        <span class="label">Place:</span>
+                        <span>{{i.place_id.place_name}}</span>
+                    </div>
+                    <div class="view-more">
+                        <a href="{% url  'User:ViewLocation' i.id %}">View More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
